@@ -10,7 +10,8 @@ License:  GPLv2
 URL:      https://repo.or.cz/linux/zf.git/shortlog/refs/heads/winesync4
 
 Source0:  https://raw.githubusercontent.com/KyleGospo/winesync-kmod/main/99-winesync.rules
-Source1:  https://raw.githubusercontent.com/KyleGospo/winesync-kmod/main/LICENSE
+Source1:  https://raw.githubusercontent.com/KyleGospo/winesync-kmod/main/winesync.conf
+Source2:  https://raw.githubusercontent.com/KyleGospo/winesync-kmod/main/LICENSE
 
 Provides: %{name}-kmod-common = %{version}
 Requires: %{name}-kmod >= %{version}
@@ -22,11 +23,13 @@ Wine synchronization primitive driver
 
 %build
 install -D -m 0644 %{SOURCE0} %{buildroot}%{_udevrulesdir}/99-winesync.rules
-install -D -m 0644 %{SOURCE1} %{buildroot}%{_datarootdir}/licenses/winesync/LICENSE
+install -D -m 0644 %{SOURCE1} %{buildroot}%{_modulesloaddir}/%{name}.conf
+install -D -m 0644 %{SOURCE2} %{buildroot}%{_datarootdir}/licenses/winesync/LICENSE
 
 %files
 %license LICENSE
 %{_udevrulesdir}/99-winesync.rules
+%{_modulesloaddir}/%{name}.conf
 
 %changelog
 {{{ git_dir_changelog }}}
